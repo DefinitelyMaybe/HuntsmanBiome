@@ -1,0 +1,10 @@
+Biomes
+{
+	Hunting Grounds
+	{
+		script = "HuntsmansGrounds.lua"
+		weight = 2
+		minSize = 3
+		maxSize = 6
+	}
+}
