@@ -7,7 +7,11 @@ end
 -------------------------------------------------------------------------------
 function HuntsmansGrounds:BuildTree()
 	--Top level materials
-	local theMaterialBlend = self:SwitchMaterial(self:Material("Mountain Green Grass"), self:Material("Green Hills"), self:Simplex((1.0 / 64.0) / 1.0, 2))
+	local someEmptyGrass = self:SwitchMaterial(self:Material("Green Hills"), self:Material("Hunting Grounds Grass1"), self:Simplex((1.0 / 16.0) / 1.0, 1))
+
+	local someshorterGrass = self:SwitchMaterial(self:Material("Hunting Grounds Grass2"), self:Material("Hunting Grounds Grass1"), self:Simplex((1.0 / 16.0) / 1.0, 1))
+
+	local theMaterialBlend = self:SwitchMaterial(someEmptyGrass, someshorterGrass, self:Simplex((1.0 / 64.0) / 1.0, 2))
 
 	--The small terrain wobbles
 	local theWobbles = self:Multiply(self:Simplex(((1.0 / 32.0) / 1.0), 2), self:Constant(1))
@@ -35,17 +39,17 @@ HuntsmansGrounds.Objects =
 	["MamaGoat Spawn Node"] =
 	{
 		density = 1,
-		chance = 0.025,
+		chance = 0.03,
 		minScale = 1.0,
-		maxScale = 1.0
+		maxScale = 1.5
 	},
 	--Plants
 	["Lotus Teeth"] =
 	{
-		density = 1,
-		chance = 0.25,
+		density = 2,
+		chance = 0.1,
 		minScale = 0.5,
-		maxScale = 1.5
+		maxScale = 2.0
 	},
 	["Lilly Pad Nut"] =
 	{
@@ -56,24 +60,24 @@ HuntsmansGrounds.Objects =
 	},
 	["Green Vine"] =
 	{
-		density = 2,
-		chance = 0.05,
+		density = 4,
+		chance = 0.03,
 		minScale = 1.0,
 		maxScale = 1.5
 	},
 	["Gourd Vine"] =
 	{
-		density = 1,
-		chance = 0.05,
-		minScale = 0.5,
-		maxScale = 1.0
+		density = 3,
+		chance = 0.02,
+		minScale = 1.0,
+		maxScale = 1.5
 	},
 	["Bush Hosta A"] =
 	{
 		density = 3,
 		chance = 0.15,
 		minScale = 1.0,
-		maxScale = 1.5
+		maxScale = 2.5
 	},
 
 	--Trees 
@@ -100,14 +104,14 @@ HuntsmansGrounds.Objects =
 	},
 	["Hardwood Sapling"] =
 	{
-		density = 1,
+		density = 2,
 		chance = 0.03,
 		minScale = 0.7,
 		maxScale = 2.0
 	},
 	["Lightwood Sapling"] =
 	{
-		density = 1,
+		density = 2,
 		chance = 0.03,
 		minScale = 0.7,
 		maxScale = 2.0
@@ -116,7 +120,97 @@ HuntsmansGrounds.Objects =
 
 HuntsmansGrounds.Clusters =
 {
-	--Needs Rocks
+	--Rocks
+	["Rock Cluster Dense"] =
+	{
+	 	density = 1,
+	 	chance = 0.03,
+		Objects =
+		{
+			{
+				name = "Loot Object",
+				offset = vec3.new(0.5, 0.0, 0.5),
+				data = {
+					lootName = "Round Rock",
+					decayTime = 0.0
+				}
+			},
+			{
+				name = "Rock08 Green",
+				minScale = 2.0,
+				maxScale = 2.5,
+				offset = vec3.new(1.0, 0.0, -3.0)
+			},
+			{
+				name = "Rock10 Green",
+				minScale = 2.5,
+				maxScale = 3.5,
+				offset = vec3.new(6.0, 0.0, 2.0)
+			}, 
+			{
+				name = "Rock09 Green",
+				minScale = 2.0,
+				maxScale = 4.0,
+				offset = vec3.new(-1.0, 0.0, 2.0)
+			}
+		}
+	},
+	["Rock Cluster Sparse"] =
+	{
+	 	density = 1,
+	 	chance = 0.05,
+		Objects =
+		{
+			{
+				name = "Rock08 Green",
+				minScale = 2.0,
+				maxScale = 2.5,
+				offset = vec3.new(10.0, 0.0, -6.0)
+			},
+			{
+				name = "Rock10 Green",
+				minScale = 2.5,
+				maxScale = 3.5,
+				offset = vec3.new(6.0, 0.0, 10.0)
+			},
+			{
+				name = "Loot Object",
+				offset = vec3.new(5.0, 0.0, 9.0),
+				data = {
+					lootName = "Round Rock",
+					decayTime = 0.0
+				}
+			},
+			{
+				name = "Rock09 Green",
+				minScale = 2.0,
+				maxScale = 4.0,
+				offset = vec3.new(-10.0, 0.0, 4.0)
+			}
+		}
+	},
+	--Plants
+	["Gourd Vines with fruit"] =
+	{
+	 	density = 2,
+	 	chance = 0.02,
+		Objects =
+		{
+			{
+				name = "Purple Gourd",
+				offset = vec3.new(1.0, 0.0, -0.5)
+			},
+			{
+				name = "Gourd Vines",
+				offset = vec3.new(0.0, 0.0, 0.0)
+			},
+			{
+				name = "Gourd Vines",
+				offset = vec3.new(-1.0, 0.0, 3.0)
+			}
+		}
+	},
+	--Misc
 	["Camping Grounds"] =
 	{
 	 	density = 1,
@@ -125,18 +219,40 @@ HuntsmansGrounds.Clusters =
 		{
 			{
 				name = "Fire Pit",
-				minScale = 2.0,
-				maxScale = 3.0,
+				minScale = 1.0,
+				maxScale = 1.0,
 				offset = vec3.new(0.0, 0.0, 0.0)
 			},
 			{
 				name = "Leaf Backpack",
 				minScale = 1.0,
 				maxScale = 1.0,
-				offset = vec3.new(-3.0, 0.0, 1.0)
+				offset = vec3.new(1.0, 0.0, -2.0)
+			},
+			{
+				name = "Flat Rock",
+				offset = vec3.new(1.0, 0.0, -3.0)
 			}
 		}
 	},
+	["Ruins"] =
+	{
+	 	density = 1,
+	 	chance = 0.01,
+		Objects =
+		{
+			{
+				name = "Stonehenge Green",
+				minScale = 1.0,
+				maxScale = 2.0,
+				offset = vec3.new(0.0, 0.0, 0.0)
+			},
+			{
+				name = "Flat Rock",
+				offset = vec3.new(2.0, 0.0, -4.0)
+			}
+		}
+	}
 }
 
 -------------------------------------------------------------------------------

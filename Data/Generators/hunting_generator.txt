@@ -1,7 +1,7 @@
 Generators
 {
-	TheFlat
+	Hunting Grounds
 	{
-		TheFlat
+		Hunting Grounds
 	}
 }

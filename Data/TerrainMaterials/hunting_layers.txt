@@ -2,7 +2,8 @@ root
 {
 	Layers
 	{
-		Hunting Grounds
+		#Name of script not name of biome
+		HuntsmansGrounds
 		{
 			Mud = 10
 			Dirt = 15
